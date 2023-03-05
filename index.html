@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html theme="light">
+
+<head>
+    <!-- SEO Information -->
+    <title>A Computational Model of a Human Neuron</title>
+    <meta name="description" content="A mathematical model implemented in MATLAB that can simulate the activity of a 
+    neuron, such as action excitation, inhibition, and action potentials. ">
+
+    <!-- Add Page Icons -->
+    <link rel="icon" type="image/x-icon" href="resources/logo.png">
+    <link rel="apple-touch-icon" href="resources/logo.png">
+
+    <!-- CSS -->
+    <link rel="preload" href="resources/styles.css" as="style">
+    <link rel="stylesheet" href="resources/styles.css">
+
+    <style data-href="https://fonts.googleapis.com/css2?family=Inter:wght@40;50;60;70;80;900&amp;display=swap">
+        
+        @font-face{
+            font-family:'Inter';
+            font-style:normal;
+            font-weight:400;
+            font-display:swap;
+            src:url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfMZs.woff) format('woff')
+        }
+        @font-face{
+            font-family:'Inter';
+            font-style:normal;
+            font-weight:500;
+            font-display:swap;
+            src:url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuI6fMZs.woff) format('woff')
+        }
+        @font-face{
+            font-family:'Inter';
+            font-style:normal;
+            font-weight:600;
+            font-display:swap;
+            src:url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuGKYMZs.woff) format('woff')
+        }
+        @font-face{
+            font-family:'Inter';
+            font-style:normal;
+            font-weight:700;
+            font-display:swap;
+            src:url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYMZs.woff) format('woff')
+        }
+        @font-face{
+            font-family:'Inter';
+            font-style:normal;
+            font-weight:800;
+            font-display:swap;
+            src:url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuDyYMZs.woff) format('woff')
+        }
+        @font-face{
+            font-family:'Inter';
+            font-style:normal;
+            font-weight:900;
+            font-display:swap;
+            src:url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuBWYMZs.woff) format('woff')
+        }
+
+    </style>
+        
+</head>
+
+<body>
+    <div class="content" id="content">
+
+
+        <div class="content preface" id="preface">
+
+            <!-- Page Title -->
+            <p class="title">A Computational Model of a Human Neuron</p>
+    
+            <!-- Author Info -->
+            <p class="metadata">Mihir Modak • September 23, 2021 • In-Class Project</p>
+    
+            <!-- Cover Image -->
+            <div contenteditable="false" style="display:flex; justify-content: center;">
+                <img alt="" src="resources/cover.gif" class="cover" decoding="async" loading="lazy">
+            </div>
+    
+    
+        </div>
+    
+        <div class="content main" id="main">
+    
+            <!-- Background & Motivation Section -->
+            <div id="background_and_motivation">
+                <h1>Background & Motivation</h1>
+    
+                <!-- Text for Background & Motivation Section -->
+                <p>
+                    This is a simulation of the activity of a single neuron using a mathematical model called the 
+                    <em>Hodgkin-Huxley Model</em>. This model can accurately represent the excitation and the <em>action potential</em>
+                    of a neuron. It can also account for sodium, potassium, and chloride ion concentrations and use those parameters to 
+                    drive the excitation of the neuron. In this project, I was able to implement this model in MATLAB, and successfully 
+                    simulate (and control) the activity of a neuron.</span>
+                </p>
+            </div>
+    
+            <!-- Process Section -->
+            <div id="process">
+                <h1>Process</h1>
+    
+                <!-- Text for Process Section -->
+                <p>Lorem ipsum</p>
+            </div>
+    
+            <!-- Results Section -->
+            <div id="results">
+                <h1>Results</h1>
+    
+                <!-- Text for Results Section -->
+                <p>Lorem Ipsum</p>
+            </div>
+
+            <!-- Contributors Section -->
+            <div id="contributors">
+                <h1>Contributors</h1>
+
+                <table>
+
+                    <tr>
+                        <th>
+                            <div class="card" style="background-color: var(--background-highlight);">
+                                <h2>Andrew Li</h2>
+                                <p class="subheading2">Teammate</p>
+                            </div>
+                        </th>
+    
+                        <th>
+                            <div class="card" style="background-color: var(--background-highlight);">
+                                <h2>Harry Zou</h2>
+                                <p class="subheading2">Teammate</p>
+                            </div>
+                        </th>
+
+                    </tr>
+
+                    <tr>
+                        <th>
+                            <div class="card" style="background-color: var(--background-highlight);">
+                                <h2>Josh Evans</h2>
+                                <p class="subheading2">Teammate</p>
+                            </div>
+                        </th>
+    
+                        <th>
+                            <div class="card" style="background-color: var(--background-highlight);">
+                                <h2>Justin Schumacher</h2>
+                                <p class="subheading2">BIOE340 TA</p>
+                            </div>
+                        </th>
+                        
+                    </tr>
+
+                </table>
+      
+            </div>
+    
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div style="margin: 20px 0px;"></div>
+        <hr>
+        <!-- <button class="roundbutton" onclick="">GitHub</button> -->
+        <div class="footer links">
+            <a href="https://github.com/mihirmodak" class="button round" target="_blank">
+                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" class="logo">
+            </a>
+
+            <a href="https://www.linkedin.com/in/mihir-modak/" class="button round" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/61/61109.png" class="logo">
+            </a>
+
+            <a href="https://1drv.ms/b/s!ApOEOvPnvhLAjtZJ2pz83mHzuuD3TA?e=BLlYrE" class="button round" target="_blank">
+                    <img src="https://icons.veryicon.com/png/o/miscellaneous/general-icon-library/resume-7.png" class="logo">
+            </a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

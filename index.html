@@ -12,8 +12,8 @@
     <link rel="apple-touch-icon" href="resources/logo.png">
 
     <!-- CSS -->
-    <link rel="preload" href="resources/styles.css" as="style">
-    <link rel="stylesheet" href="resources/styles.css">
+    <link rel="preload" href="resources/project_styles.css" as="style">
+    <link rel="stylesheet" href="resources/project_styles.css">
 
     <style data-href="https://fonts.googleapis.com/css2?family=Inter:wght@40;50;60;70;80;900&amp;display=swap">
         
@@ -87,7 +87,7 @@
         <div class="content main" id="main">
     
             <!-- Background & Motivation Section -->
-            <div id="background_and_motivation">
+            <article id="background_and_motivation">
                 <h1>Background & Motivation</h1>
     
                 <!-- Text for Background & Motivation Section -->
@@ -96,31 +96,31 @@
                     <em>Hodgkin-Huxley Model</em>. This model can accurately represent the excitation and the <em>action potential</em>
                     of a neuron. It can also account for sodium, potassium, and chloride ion concentrations and use those parameters to 
                     drive the excitation of the neuron. In this project, I was able to implement this model in MATLAB, and successfully 
-                    simulate (and control) the activity of a neuron.</span>
+                    simulate (and control) the activity of a neuron.
                 </p>
-            </div>
+            </article>
     
             <!-- Process Section -->
-            <div id="process">
+            <article id="process">
                 <h1>Process</h1>
     
                 <!-- Text for Process Section -->
                 <p>Lorem ipsum</p>
-            </div>
+            </article>
     
             <!-- Results Section -->
-            <div id="results">
+            <article id="results">
                 <h1>Results</h1>
     
                 <!-- Text for Results Section -->
                 <p>Lorem Ipsum</p>
-            </div>
+            </article>
 
             <!-- Contributors Section -->
-            <div id="contributors">
+            <article id="contributors">
                 <h1>Contributors</h1>
 
-                <table>
+                <table style="border: 0px;">
 
                     <tr>
                         <th>
@@ -158,16 +158,16 @@
 
                 </table>
       
-            </div>
+            </article>
     
         </div>
 
     </div>
 
-    <div class="footer">
-        <div style="margin: 20px 0px;"></div>
+    <footer class="footer">
+        <div style="margin: 20px 0px;"></div> <!-- A spacer, since <br> doesn't work apparently -->
         <hr>
-        <!-- <button class="roundbutton" onclick="">GitHub</button> -->
+
         <div class="footer links">
             <a href="https://github.com/mihirmodak" class="button round" target="_blank">
                 <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" class="logo">
@@ -180,9 +180,12 @@
             <a href="https://1drv.ms/b/s!ApOEOvPnvhLAjtZJ2pz83mHzuuD3TA?e=BLlYrE" class="button round" target="_blank">
                     <img src="https://icons.veryicon.com/png/o/miscellaneous/general-icon-library/resume-7.png" class="logo">
             </a>
-        </div>
 
-    </div>
+            <a href="mailto:mihir.modak@outlook.com" class="button round" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/2989/2989993.png" class="logo">
+            </a>
+        </div>
+    </footer>
 
 </body>
 

@@ -15,6 +15,5 @@
 | Andrew Li | Teammate |
 | Harry Zou | Teammate |
 | Josh Evans | Teammate |
-| Justin Schumacher | BIOE340 TA |
 
 

@@ -10,8 +10,8 @@
 ## Results
 
 ## Contributors
-| Name   | Contribution   |
-| ------ | -------------- |
+| Name   | Role   |
+| ------ | ------ |
 | Andrew Li | Teammate |
 | Harry Zou | Teammate |
 | Josh Evans | Teammate |

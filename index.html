@@ -21,6 +21,10 @@
     <!-- CSS -->
     <link rel="preload" href="resources/styles.css" as="style">
     <link rel="stylesheet" href="resources/styles.css">
+    <link rel="preload" href="resources/tags.css" as="style">
+    <link rel="stylesheet" href="resources/tags.css">
+    <link rel="preload" href="resources/classes.css" as="style">
+    <link rel="stylesheet" href="resources/classes.css">
 
     <style data-href="https://fonts.googleapis.com/css2?family=Inter:wght@40;50;60;70;80;900&amp;display=swap">
         
@@ -73,232 +77,264 @@
 
 <body>
 
-        <div class="preface" id="preface">
+    <!-- Page Title -->
+    <p class="title">A Computational Model of a Human Neuron</p>
 
-            <!-- Page Title -->
-            <p class="title">A Computational Model of a Human Neuron</p>
-    
-            <!-- Author Info -->
-            <p class="metadata">Mihir Modak • September 23, 2021 • MATLAB</p>
-    
-            <!-- Cover Image -->
-            <div contenteditable="false" style="display:flex; justify-content: center;">
-                <img alt="" src="resources/cover.gif" class="cover" decoding="async" loading="lazy">
-            </div>
-    
-    
+    <!-- Author Info -->
+    <p class="metadata">Mihir Modak • September 23, 2021 • MATLAB</p>
+
+    <!-- Cover Image -->
+    <div contenteditable="false" style="display:flex; justify-content: center;">
+        <img alt="" src="resources/cover.gif" decoding="async" loading="lazy">
+    </div>
+
+
+    <!-- Abstract Section -->
+    <details id="abstract" open>
+        <summary>
+            Abstract
+        </summary>
+
+        <div id="abstract-content">
+
+            <!-- Text for Abstract Section -->
+            <p>
+                This project was originally a lab assignment in a physiology course at the University of Maryland. It involved 
+                implementing the <em>Hodgkin-Huxley Model</em> in MATLAB, figuring out the relevant thresholds to manipulate 
+                the neuron's state, and changing the parameters to cause a 'disease' state (a state wildly different from the 
+                normal activity of the neuron).
+            </p>
+
         </div>
-    
-        <div class="main" id="main">
-    
-            <!-- Abstract Section -->
-            <article id="abstract">
-                <h1 class="collapsible" onclick="toggle(this.id)">Abstract</h1>
-    
-                <div class="content">
 
-                    <!-- Text for Abstract Section -->
-                    <p>
-                        This project was originally a lab assignment in a physiology course at the University of Maryland. It involved 
-                        implementing the <em>Hodgkin-Huxley Model</em> in MATLAB, figuring out the relevant thresholds to manipulate 
-                        the neuron's state, and changing the parameters to cause a 'disease' state (a state wildly different from the 
-                        normal activity of the neuron).
-                    </p>
+    </details>
 
-                </div>
+    <!-- Background & Motivation Section -->
+    <details id="background_and_motivation" open>
+        <summary>Background & Motivation</summary>
 
-            </article>
+        <div id="background-content">
 
-            <!-- Background & Motivation Section -->
-            <article id="background_and_motivation">
-                <h1 class="collapsible" onclick="toggle(this.id)">Background & Motivation</h1>
-    
-                <div class="content">
+            <!-- Text for Background & Motivation Section -->
+            <p>
+                The <em>Hodgkin-Huxley Model</em> is a mathematical model of a human neuron that can mimic the electrical 
+                voltage across a neuron's membrane by tracking multiple parameters about the neuron's state and environment.
+                <br/><br/>
 
-                    <!-- Text for Background & Motivation Section -->
-                    <p>
-                        The <em>Hodgkin-Huxley Model</em> is a mathematical model of a human neuron that can mimic the electrical 
-                        voltage across a neuron's membrane by tracking multiple parameters about the neuron's state and environment.
-                        <br/><br/>
+                Human neurons (or really, any neurons) have one very important property that lets them transmit information
+                through electric impulses along the length of their cell body. Neurons can generate 
+                <strong>action potentials (APs)</strong>, which are giant upward (positive) spikes in the voltage across
+                the cell membrane. 
+                <br/><br/>
 
-                        Human neurons (or really, any neurons) have one very important property that lets them transmit information
-                        through electric impulses along the length of their cell body. Neurons can generate 
-                        <strong>action potentials (APs)</strong>, which are giant upward (positive) spikes in the voltage across
-                        the cell membrane. 
-                        <br/><br/>
+                Neurons can generate these because they have ion channels in their membrane. They can passively increase
+                the voltage across their cell membrane (membrane voltage or \(V_m\)) until a certain threshold. Once the 
+                threshold is reached, a whole bunch of gates open up for ions to flow freely. And that causes the giant 
+                spike that you see in the gif above.
+                <br/><br/>
 
-                        Neurons can generate these because they have ion channels in their membrane. They can passively increase
-                        the voltage across their cell membrane (membrane voltage or \(V_m\)) until a certain threshold. Once the 
-                        threshold is reached, a whole bunch of gates open up for ions to flow freely. And that causes the giant 
-                        spike that you see in the gif above.
-                        <br/><br/>
+                A detailed description of how the model works and the parameters it tracks can be found in the 'Conceptual 
+                Summary' section of 
+                <a href="https://www.st-andrews.ac.uk/~wjh/hh_model_intro/">this article</a>.  
+                MIT OpenCourseWare also has some videos
+                <a href="https://www.youtube.com/watch?v=88tKZLGOr3M">here</a> and 
+                <a href="https://www.youtube.com/watch?v=K1pxJVdqlxw">here</a> that explain the concepts really well.
+                <br/><br/>
 
-                        A detailed description of how the model works and the parameters it tracks can be found in the 'Conceptual 
-                        Summary' section of 
-                        <a href="https://www.st-andrews.ac.uk/~wjh/hh_model_intro/">this article</a>.  
-                        MIT OpenCourseWare also has some videos
-                        <a href="https://www.youtube.com/watch?v=88tKZLGOr3M">here</a> and 
-                        <a href="https://www.youtube.com/watch?v=K1pxJVdqlxw">here</a> that explain the concepts really well.
-                        <br/><br/>
+                The exact opening and closing of the Sodium (Na<sup>+</sup>) and Potassium (K<sup>+</sup>) channels 
+                coresponds to different points in the action potential spike.
 
-                        The exact opening and closing of the Sodium (Na<sup>+</sup>) and Potassium (K<sup>+</sup>) channels 
-                        coresponds to different points in the action potential spike.
+                <img src="resources/action_potential.png"  
+                    alt="Action Potential with Na & K ion channels opening and closing events mapped onto the voltage curve over 
+                        time." 
+                >
+            </p>
 
-                        <img src="resources/action_potential.png" 
-                            class="cover" 
-                            alt="Action Potential with Na & K ion channels opening and closing events mapped onto the voltage curve over 
-                                time." 
-                        >
-                    </p>
+        </div>
 
-                </div>
+    </details>
 
-            </article>
-    
-            <!-- Process Section -->
-            <article id="process">
-                <h1 class="collapsible" onclick="toggle(this.id)">Process</h1>
-    
-                <div class="content">
+    <!-- Process Section -->
+    <details id="process" open>
+        <summary>Process</summary>
 
-                    <!-- Text for Process Section -->
-                    <p>
-                        To simulate a human neuron accurately, we need to find some initial properties of the neuron to start our 
-                        simulation.
+        <div>
 
-                        <table>
-                            <tr style="text-align: center;">
-                                <th>Variable</th>
-                                <th>Description</th>
-                                <th style="width: 140px;">Value</th>
-                            </tr>
+            <!-- Text for Process Section -->
+            <p>
+                To simulate a human neuron accurately, we needed to calculate some initial properties of the neuron to start our 
+                simulation.
 
-                            <!-- E_Na -->
-                            <tr>
-                                <td>\( E_{Na} \)</td>
-                                <td>
-                                    The
-                                    <div class="tooltip"> electrochemical potential
-                                        <span class="tooltiptext">This is a measure of the driving force that causes the movement
-                                            of the ion (in this case Na<sup>+</sup>) into and out of the neuron.</span>
-                                    </div>
-                                    of the Sodium ion.
-                                </td>
-                                <td>&nbsp;71.4710 mV</td>
-                            </tr>
+                <table>
+                    <tr style="text-align: center;">
+                        <th>Variable</th>
+                        <th>Description</th>
+                        <th style="width: 140px;">Value</th>
+                    </tr>
 
-                            <!-- E_K -->
-                            <tr>
-                                <td>\( E_{K} \)</td>
-                                <td>
-                                    The electrochemical potential of the Potassium ion.
-                                </td>
-                                <td>-89.0587 mV</td>
-                            </tr>
+                    <!-- E_Na -->
+                    <tr>
+                        <td>\( E_{Na} \)</td>
+                        <td>
+                            The
+                            <div class="tooltip"> electrochemical potential
+                                <span class="tooltiptext">This is a measure of the driving force that causes the movement
+                                    of the ion (in this case Na<sup>+</sup>) into and out of the neuron. It's calculated using
+                                the typical (experimentally-found) concentration of ions inside and outside the cell.</span>
+                            </div>
+                            of the Sodium ion.
+                        </td>
+                        <td>&nbsp;71.4710 mV</td>
+                    </tr>
 
-                            <!-- E_L -->
-                            <tr>
-                                <td>\( E_{L} \)</td>
-                                <td>
-                                    The electrochemical potential of the 
-                                    
-                                    <div class="tooltip">leak current
-                                        <span class="tooltiptext">
-                                            The leak current in neurons is the flow of Sodium & Potassium ions across the cell 
-                                            membrane that happens even when the neuron is not actively transmitting signals. It 
-                                            helps set the resting membrane potential of neurons, which is important for normal 
-                                            functioning. Changes in the leak current can affect how easily the neuron fires an 
-                                            action potential and can have significant effects on the activity of the neuron.
-                                        </span>
-                                    </div>
-                                </td>
-                                <td>-55.0000 mV</td>
-                            </tr>
+                    <!-- E_K -->
+                    <tr>
+                        <td>\( E_{K} \)</td>
+                        <td>
+                            The electrochemical potential of the Potassium ion.
+                        </td>
+                        <td>-89.0587 mV</td>
+                    </tr>
 
-                            <!-- V_r -->
-                            <tr>
-                                <td>\( V_r \)</td>
-                                <td>
-                                    The electric potential across the neuron's membrane at rest. 
-                                    Also known as the resting membrane potential.
-                                </td>
-                                <td>-72.8515 mV</td>
-                            </tr>
-
-                        </table>
-                        \[ 
-                        
-                            {dV \over dt} = { - g_K (V_m - E_K) - g_{Na} (V_m - E_{Na}) - g_L (V_m - E_L) + I_{stim} \over {C_m} }
-                        
-                        \]
-                    </p>
-
-                </div>
-
-            </article>
-    
-            <!-- Results Section -->
-            <article id="results">
-                <h1 class="collapsible" onclick="toggle(this.id)">Results</h1>
-    
-                <div class="content">
-
-                    <!-- Text for Results Section -->
-                    <p>Will be added soon.</p>
-
-                </div>
-
-            </article>
-
-            <!-- Contributors Section -->
-            <article id="contributors">
-                <h1 class="collapsible" onclick="toggle(this.id)">Contributors</h1>
-
-                <div class="content">
-
-                    <table style="border: 0px;">
-
-                        <tr>
-                            <th>
-                                <div class="card" style="background-color: var(--background-highlight);">
-                                    <h2>Andrew Li</h2>
-                                    <p class="subheading">Teammate</p>
-                                </div>
-                            </th>
-        
-                            <th>
-                                <div class="card" style="background-color: var(--background-highlight);">
-                                    <h2>Harry Zou</h2>
-                                    <p class="subheading">Teammate</p>
-                                </div>
-                            </th>
-    
-                        </tr>
-    
-                        <tr>
-                            <th>
-                                <div class="card" style="background-color: var(--background-highlight);">
-                                    <h2>Josh Evans</h2>
-                                    <p class="subheading">Teammate</p>
-                                </div>
-                            </th>
-    
+                    <!-- E_L -->
+                    <tr>
+                        <td>\( E_{L} \)</td>
+                        <td>
+                            The electrochemical potential of the 
                             
-                        </tr>
-    
-                    </table>
-    
-                    <P class="subheading" style="font-weight: normal; font-style: italic;">
-                        Published in collaboration with all contributors and the course instructor. <br/>
-                        Code has been modified and obfuscated to prevent future students in the course from 
-                        using it for their assignments.
-                    </p>
+                            <div class="tooltip">leak current
+                                <span class="tooltiptext">
+                                    The leak current is the flow of Sodium & Potassium ions across the cell membrane 
+                                    that happens even when the neuron is not actively transmitting signals. It helps 
+                                    set the resting membrane potential of neurons, which is important for normal 
+                                    functioning.
+                                </span>
+                            </div>
+                        </td>
+                        <td>-55.0000 mV</td>
+                    </tr>
 
-                </div>
-      
-            </article>
-    
+                    <!-- V_r -->
+                    <tr>
+                        <td>\( V_r \)</td>
+                        <td>
+                            The electric potential across the neuron's membrane at rest. 
+                            Also known as the resting membrane potential (\(V_m\))
+                        </td>
+                        <td>-72.8515 mV</td>
+                    </tr>
+
+                </table>
+
+                Those values can be plugged into the Hodgkin-Huxley model equation, along with the conductances of each ion/channel 
+                (\(g_{Na}\), \(g_{K}\), \(g_{L}\))
+
+                \[ 
+                
+                    {dV_m \over dt} = { - g_K (V_m - E_K) - g_{Na} (V_m - E_{Na}) - g_L (V_m - E_L) + I_{stim} \over {C_m} }
+                
+                \]
+
+                This model considers the movement of two ions &#8212; Sodium (Na<sup>+</sup>) and Potassium (K<sup>+</sup>). Each 
+                ion has its own channels, and each of those is controlled by <strong>gating parameters</strong>. See 
+                the Conceptual Summary in <a href="https://www.st-andrews.ac.uk/~wjh/hh_model_intro/">this</a> article for a more 
+                complete and detailed explanation. 
+                The Na<sup>+</sup> conductance through the ion channels is controlled by two gating parameters, 
+                (<b>m</b> and <b>h</b>) while the K<sup>+</sup> conductance is governed by the 
+                <b>n</b> gating parameter.
+                <br/><br/>
+
+                The \(I_{stim}\) varialbe accounts for the current that we 'manually' inject into the neuron. Any current we 
+                inject does affect the membrane potential. Including \(I_{stim}\) in the equation allows our simulated neuron 
+                to respond to simulated external stimuli.
+
+                <h3>The Potassium Model:</h3>
+
+                The conductance of Potassium ions is given by
+                \[
+                    { g_K (t, v_m) } = { \overline{g_K} \times n^4(t, v_m)}
+                \]
+                
+                This equation is dependent on the gating parameter <b>n</b>, and we can model the change in <b>n</b> over time 
+                using:
+                
+                \[
+                    {dn \over dt} = { \alpha_n v_m (1-n)\ -\ \beta_n v_m n }
+                \]
+
+                where \(\alpha_n\) and \(\beta_n\) are coefficients calculated using the \(v_m\).
+
+                <h3>The Sodium Model:</h3>
+
+
+                
+            </p>
+
         </div>
+
+    </details>
+
+    <!-- Results Section -->
+    <details id="results" open>
+        <summary>Results</summary>
+
+        <div>
+
+            <!-- Text for Results Section -->
+            <p>Will be added soon.</p>
+
+        </div>
+
+    </details>
+
+    <!-- Contributors Section -->
+    <details id="contributors" open>
+        <summary>Contributors</summary>
+
+        <div>
+
+            <table class="contributors" style="border: none; border-left: none;">
+
+                <tr>
+                    <td>
+                        <div class="card" style="background-color: var(--background-highlight);">
+                            <h2>Andrew Li</h2>
+                            <p class="metadata">Teammate</p>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="card" style="background-color: var(--background-highlight);">
+                            <h2>Harry Zou</h2>
+                            <p class="metadata">Teammate</p>
+                        </div>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="card" style="background-color: var(--background-highlight);">
+                            <h2>Josh Evans</h2>
+                            <p class="metadata">Teammate</p>
+                        </div>
+                    </td>
+
+                    
+                </tr>
+
+            </table>
+
+            <P class="metadata" style="font-weight: normal; font-style: italic;">
+                Published in collaboration with all contributors and the course instructor. <br/>
+                Code has been modified and obfuscated to prevent future students in the course from 
+                using it for their assignments.
+            </p>
+
+        </div>
+
+    </details>
+    
 
 
     <footer class="footer">

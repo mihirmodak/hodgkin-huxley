@@ -294,6 +294,48 @@
     --elevation-surface-raised:0px 0px 0px transparent,0px 1px 1px rgba(3,4,4,.5),0px 0px 1px rgba(3,4,4,.5)
 }
 
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: initial;
+    display: flex;
+    
+}
+
+a.button.round{
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    color: initial;
+    position:relative;
+    padding:10px 10px;
+    margin: 10px 10px;
+    border-radius:999px;
+    width:fit-content;
+    display:flex;
+    border: none;
+    font-family:inherit;
+    font-size:unset;
+    line-height:unset;
+    background-color:unset;
+    cursor:pointer;
+    box-shadow: 0 .5em 1em -.125em hsla(0,0%,4%,.1),0 0 0 1px hsla(0,0%,4%,.02);
+}
+
+hr {
+    border:none;
+    margin:13px 0px;
+    background-color:var(--text-lighter)!important;
+    height:1px!important;
+    opacity:.3;
+    width: 75%;
+    /* max-width: 1rem; */
+}
+
 html {
     background-color:#fff;
     font-size:16px;
@@ -334,48 +376,29 @@ p {
     max-width: min(100%, 700px);
 }
 
-hr {
-    border:none;
-    margin:13px 0px;
-    background-color:var(--text-lighter)!important;
-    height:1px!important;
-    opacity:.3;
-    width: 75%;
-    /* max-width: 1rem; */
+table {
+    margin-top: 2em;
+    margin-bottom: 3em;
 }
 
-
-a.button {
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-
-    text-decoration: none;
-    color: initial;
-    display: flex;
-    
+table td + td, th + th { 
+    border-left:1.5px solid var(--border-highlight); 
 }
 
-a.button.round{
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-    text-decoration: none;
-    color: initial;
-    position:relative;
-    padding:10px 10px;
-    margin: 10px 10px;
-    border-radius:999px;
-    width:fit-content;
-    display:flex;
-    border: none;
-    font-family:inherit;
-    font-size:unset;
-    line-height:unset;
-    background-color:unset;
-    cursor:pointer;
-    box-shadow: 0 .5em 1em -.125em hsla(0,0%,4%,.1),0 0 0 1px hsla(0,0%,4%,.02);
+tr, td {
+    padding: 20px;
+    border-bottom: none;
+    max-width: min(100%, 700px);
 }
+
+/* tr:last-child td {
+    border-bottom: 1.5px solid var(--border-highlight);
+} */
+
+/* tr:first-child th {
+    border-bottom: 1.5px solid var(--border-highlight);
+    border-top: 1.5px solid var(--border-highlight);
+} */
 
 .card{
     /* background-color: var(--background-highlight); */
@@ -391,22 +414,44 @@ a.button.round{
     width:18em;
 }
 
+.collapsible {
+    width:auto;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+}
+
+.active, .collapsible:hover {
+    background-color: var(--background-highlight);
+  }
+
 .content {
     width: 700px;
     max-width: min(100%, 700px); 
     align-self: center;
+    /* max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out; */
 }
 
-.content.preface {
+.preface {
+    width: 700px;
+    max-width: min(100%, 700px); 
+    align-self: center;
     text-align: left;
 }
 
-.content.main {
+.main {
+    width: 700px;
+    max-width: min(100%, 700px); 
+    align-self: center;
     text-align: left;
 }
 
 .cover {
     width: auto;
+    max-width: min(700px, 100%);
 }
 
 .footer { /* This is a container */
@@ -459,7 +504,37 @@ a.button.round{
 }
 
 .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
     visibility: hidden;
+    width:400px;
+    background-color: var(--background-highlight);
+    color: var(--text-light-theme);
+    text-align: center;
+    border-radius: 6px;
+    /* border: 1px solid var(--background-invert-highlight); */
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -200px;
+    padding: 15px;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--background-highlight) transparent transparent transparent;
 }
 
 .tooltip:hover .tooltiptext {

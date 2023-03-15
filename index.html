@@ -7,9 +7,16 @@
     <meta name="description" content="A mathematical model implemented in MATLAB that can simulate the activity of a 
     neuron, such as action excitation, inhibition, and action potentials. ">
 
+    <!-- Settings for the whole document -->
+    <base target="_blank">
+
     <!-- Add Page Icons -->
     <link rel="icon" type="image/x-icon" href="resources/logo.png">
     <link rel="apple-touch-icon" href="resources/logo.png">
+
+    <!-- MathJax JavaScript -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <!-- CSS -->
     <link rel="preload" href="resources/styles.css" as="style">
@@ -65,10 +72,8 @@
 </head>
 
 <body>
-    <div class="content" id="content">
 
-
-        <div class="content preface" id="preface">
+        <div class="preface" id="preface">
 
             <!-- Page Title -->
             <p class="title">A Computational Model of a Human Neuron</p>
@@ -84,106 +89,242 @@
     
         </div>
     
-        <div class="content main" id="main">
+        <div class="main" id="main">
     
+            <!-- Abstract Section -->
+            <article id="abstract">
+                <h1 class="collapsible" onclick="toggle(this.id)">Abstract</h1>
+    
+                <div class="content">
+
+                    <!-- Text for Abstract Section -->
+                    <p>
+                        This project was originally a lab assignment in a physiology course at the University of Maryland. It involved 
+                        implementing the <em>Hodgkin-Huxley Model</em> in MATLAB, figuring out the relevant thresholds to manipulate 
+                        the neuron's state, and changing the parameters to cause a 'disease' state (a state wildly different from the 
+                        normal activity of the neuron).
+                    </p>
+
+                </div>
+
+            </article>
+
             <!-- Background & Motivation Section -->
             <article id="background_and_motivation">
-                <h1>Background & Motivation</h1>
+                <h1 class="collapsible" onclick="toggle(this.id)">Background & Motivation</h1>
     
-                <!-- Text for Background & Motivation Section -->
-                <p>
-                    This is a simulation of the activity of a single neuron using a mathematical model called the 
-                    <em>Hodgkin-Huxley Model</em>. This model can accurately represent the excitation and the <em>action potential</em>
-                    of a neuron. It can also account for sodium, potassium, and chloride ion concentrations and use those parameters to 
-                    drive the excitation of the neuron. In this project, I was able to implement this model in MATLAB, and successfully 
-                    simulate a neuron, and control its response to different stimuli.
-                </p>
+                <div class="content">
+
+                    <!-- Text for Background & Motivation Section -->
+                    <p>
+                        The <em>Hodgkin-Huxley Model</em> is a mathematical model of a human neuron that can mimic the electrical 
+                        voltage across a neuron's membrane by tracking multiple parameters about the neuron's state and environment.
+                        <br/><br/>
+
+                        Human neurons (or really, any neurons) have one very important property that lets them transmit information
+                        through electric impulses along the length of their cell body. Neurons can generate 
+                        <strong>action potentials (APs)</strong>, which are giant upward (positive) spikes in the voltage across
+                        the cell membrane. 
+                        <br/><br/>
+
+                        Neurons can generate these because they have ion channels in their membrane. They can passively increase
+                        the voltage across their cell membrane (membrane voltage or \(V_m\)) until a certain threshold. Once the 
+                        threshold is reached, a whole bunch of gates open up for ions to flow freely. And that causes the giant 
+                        spike that you see in the gif above.
+                        <br/><br/>
+
+                        A detailed description of how the model works and the parameters it tracks can be found in the 'Conceptual 
+                        Summary' section of 
+                        <a href="https://www.st-andrews.ac.uk/~wjh/hh_model_intro/">this article</a>.  
+                        MIT OpenCourseWare also has some videos
+                        <a href="https://www.youtube.com/watch?v=88tKZLGOr3M">here</a> and 
+                        <a href="https://www.youtube.com/watch?v=K1pxJVdqlxw">here</a> that explain the concepts really well.
+                        <br/><br/>
+
+                        The exact opening and closing of the Sodium (Na<sup>+</sup>) and Potassium (K<sup>+</sup>) channels 
+                        coresponds to different points in the action potential spike.
+
+                        <img src="resources/action_potential.png" 
+                            class="cover" 
+                            alt="Action Potential with Na & K ion channels opening and closing events mapped onto the voltage curve over 
+                                time." 
+                        >
+                    </p>
+
+                </div>
+
             </article>
     
             <!-- Process Section -->
             <article id="process">
-                <h1>Process</h1>
+                <h1 class="collapsible" onclick="toggle(this.id)">Process</h1>
     
-                <!-- Text for Process Section -->
-                <p>Will be added soon.</p>
+                <div class="content">
+
+                    <!-- Text for Process Section -->
+                    <p>
+                        To simulate a human neuron accurately, we need to find some initial properties of the neuron to start our 
+                        simulation.
+
+                        <table>
+                            <tr style="text-align: center;">
+                                <th>Variable</th>
+                                <th>Description</th>
+                                <th style="width: 140px;">Value</th>
+                            </tr>
+
+                            <!-- E_Na -->
+                            <tr>
+                                <td>\( E_{Na} \)</td>
+                                <td>
+                                    The
+                                    <div class="tooltip"> electrochemical potential
+                                        <span class="tooltiptext">This is a measure of the driving force that causes the movement
+                                            of the ion (in this case Na<sup>+</sup>) into and out of the neuron.</span>
+                                    </div>
+                                    of the Sodium ion.
+                                </td>
+                                <td>&nbsp;71.4710 mV</td>
+                            </tr>
+
+                            <!-- E_K -->
+                            <tr>
+                                <td>\( E_{K} \)</td>
+                                <td>
+                                    The electrochemical potential of the Potassium ion.
+                                </td>
+                                <td>-89.0587 mV</td>
+                            </tr>
+
+                            <!-- E_L -->
+                            <tr>
+                                <td>\( E_{L} \)</td>
+                                <td>
+                                    The electrochemical potential of the 
+                                    
+                                    <div class="tooltip">leak current
+                                        <span class="tooltiptext">
+                                            The leak current in neurons is the flow of Sodium & Potassium ions across the cell 
+                                            membrane that happens even when the neuron is not actively transmitting signals. It 
+                                            helps set the resting membrane potential of neurons, which is important for normal 
+                                            functioning. Changes in the leak current can affect how easily the neuron fires an 
+                                            action potential and can have significant effects on the activity of the neuron.
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>-55.0000 mV</td>
+                            </tr>
+
+                            <!-- V_r -->
+                            <tr>
+                                <td>\( V_r \)</td>
+                                <td>
+                                    The electric potential across the neuron's membrane at rest. 
+                                    Also known as the resting membrane potential.
+                                </td>
+                                <td>-72.8515 mV</td>
+                            </tr>
+
+                        </table>
+                        \[ 
+                        
+                            {dV \over dt} = { - g_K (V_m - E_K) - g_{Na} (V_m - E_{Na}) - g_L (V_m - E_L) + I_{stim} \over {C_m} }
+                        
+                        \]
+                    </p>
+
+                </div>
+
             </article>
     
             <!-- Results Section -->
             <article id="results">
-                <h1>Results</h1>
+                <h1 class="collapsible" onclick="toggle(this.id)">Results</h1>
     
-                <!-- Text for Results Section -->
-                <p>Will be added soon.</p>
+                <div class="content">
+
+                    <!-- Text for Results Section -->
+                    <p>Will be added soon.</p>
+
+                </div>
+
             </article>
 
             <!-- Contributors Section -->
             <article id="contributors">
-                <h1>Contributors</h1>
+                <h1 class="collapsible" onclick="toggle(this.id)">Contributors</h1>
 
-                <table style="border: 0px;">
+                <div class="content">
 
-                    <tr>
-                        <th>
-                            <div class="card" style="background-color: var(--background-highlight);">
-                                <h2>Andrew Li</h2>
-                                <p class="subheading">Teammate</p>
-                            </div>
-                        </th>
+                    <table style="border: 0px;">
+
+                        <tr>
+                            <th>
+                                <div class="card" style="background-color: var(--background-highlight);">
+                                    <h2>Andrew Li</h2>
+                                    <p class="subheading">Teammate</p>
+                                </div>
+                            </th>
+        
+                            <th>
+                                <div class="card" style="background-color: var(--background-highlight);">
+                                    <h2>Harry Zou</h2>
+                                    <p class="subheading">Teammate</p>
+                                </div>
+                            </th>
     
-                        <th>
-                            <div class="card" style="background-color: var(--background-highlight);">
-                                <h2>Harry Zou</h2>
-                                <p class="subheading">Teammate</p>
-                            </div>
-                        </th>
+                        </tr>
+    
+                        <tr>
+                            <th>
+                                <div class="card" style="background-color: var(--background-highlight);">
+                                    <h2>Josh Evans</h2>
+                                    <p class="subheading">Teammate</p>
+                                </div>
+                            </th>
+    
+                            
+                        </tr>
+    
+                    </table>
+    
+                    <P class="subheading" style="font-weight: normal; font-style: italic;">
+                        Published in collaboration with all contributors and the course instructor. <br/>
+                        Code has been modified and obfuscated to prevent future students in the course from 
+                        using it for their assignments.
+                    </p>
 
-                    </tr>
-
-                    <tr>
-                        <th>
-                            <div class="card" style="background-color: var(--background-highlight);">
-                                <h2>Josh Evans</h2>
-                                <p class="subheading">Teammate</p>
-                            </div>
-                        </th>
-
-                        
-                    </tr>
-
-                </table>
-
-                <P class="subheading" style="font-weight: normal; font-style: italic;">
-                    Published in collaboration with all contributors.
-                </p>
+                </div>
       
             </article>
     
         </div>
 
-    </div>
 
     <footer class="footer">
         <div style="margin: 20px 0px;"></div> <!-- A spacer, since <br> doesn't work apparently -->
         <hr>
 
         <div class="footer links">
-            <a href="https://github.com/mihirmodak" class="button round" target="_blank">
+            <a href="https://github.com/mihirmodak" class="button round">
                 <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" class="logo">
             </a>
 
-            <a href="https://www.linkedin.com/in/mihir-modak/" class="button round" target="_blank">
+            <a href="https://www.linkedin.com/in/mihir-modak/" class="button round" >
                 <img src="https://cdn-icons-png.flaticon.com/512/61/61109.png" class="logo">
             </a>
 
-            <a href="https://1drv.ms/b/s!ApOEOvPnvhLAjtZJ2pz83mHzuuD3TA?e=BLlYrE" class="button round" target="_blank">
+            <a href="https://1drv.ms/b/s!ApOEOvPnvhLAjtZJ2pz83mHzuuD3TA?e=BLlYrE" class="button round" >
                     <img src="https://icons.veryicon.com/png/o/miscellaneous/general-icon-library/resume-7.png" class="logo">
             </a>
 
-            <a href="mailto:mihir.modak@outlook.com" class="button round" target="_blank">
+            <a href="mailto:mihir.modak@outlook.com" class="button round" >
                 <img src="https://cdn-icons-png.flaticon.com/512/2989/2989993.png" class="logo">
             </a>
         </div>
     </footer>
+
+    <script src="C:/Users/mihir/OneDrive/Programs/hodgkin-huxley/resources/scripts.js"></script>
 
 </body>
 

@@ -88,9 +88,8 @@
         <img alt="" src="resources/cover.gif" decoding="async" loading="lazy">
     </div>
 
-
     <!-- Abstract Section -->
-    <details id="abstract" open>
+    <article id="abstract">
         <summary>
             Abstract
         </summary>
@@ -107,11 +106,11 @@
 
         </div>
 
-    </details>
+    </article>
 
     <!-- Background & Motivation Section -->
-    <details id="background_and_motivation" open>
-        <summary>Background & Motivation</summary>
+    <article id="background">
+        <summary>Background</summary>
 
         <div id="background-content">
 
@@ -130,7 +129,7 @@
                 Neurons can generate these because they have ion channels in their membrane. They can passively increase
                 the voltage across their cell membrane (membrane voltage or \(V_m\)) until a certain threshold. Once the 
                 threshold is reached, a whole bunch of gates open up for ions to flow freely. And that causes the giant 
-                spike that you see in the gif above.
+                spike that you see in the image below.
                 <br/><br/>
 
                 A detailed description of how the model works and the parameters it tracks can be found in the 'Conceptual 
@@ -152,82 +151,104 @@
 
         </div>
 
-    </details>
+    </article>
 
     <!-- Process Section -->
-    <details id="process" open>
+    <article id="process">
         <summary>Process</summary>
 
-        <div>
+        <div id="process-content">
 
             <!-- Text for Process Section -->
             <p>
-                To simulate a human neuron accurately, we needed to calculate some initial properties of the neuron to start our 
+                To simulate a human neuron accurately, we need to calculate some initial properties of the neuron to start our 
                 simulation.
+            </p>
 
-                <table>
-                    <tr style="text-align: center;">
-                        <th>Variable</th>
-                        <th>Description</th>
-                        <th style="width: 140px;">Value</th>
-                    </tr>
+            <table>
+                <tr style="text-align: center;">
+                    <th>Variable</th>
+                    <th>Description</th>
+                    <th style="width: 140px;">Value</th>
+                </tr>
 
-                    <!-- E_Na -->
-                    <tr>
-                        <td>\( E_{Na} \)</td>
-                        <td>
-                            The
-                            <div class="tooltip"> electrochemical potential
-                                <span class="tooltiptext">This is a measure of the driving force that causes the movement
-                                    of the ion (in this case Na<sup>+</sup>) into and out of the neuron. It's calculated using
-                                the typical (experimentally-found) concentration of ions inside and outside the cell.</span>
-                            </div>
-                            of the Sodium ion.
-                        </td>
-                        <td>&nbsp;71.4710 mV</td>
-                    </tr>
+                <!-- E_Na -->
+                <tr>
+                    <td>\( E_{Na} \)</td>
+                    <td>
+                        The
+                        <div class="tooltip"> electrochemical potential
+                            <span class="tooltiptext">This is a measure of the driving force that causes the movement
+                                of the ion (in this case Na<sup>+</sup>) into and out of the neuron. It's calculated using
+                            the typical (experimentally-found) concentration of ions inside and outside the cell.</span>
+                        </div>
+                        of the Sodium ion.
+                    </td>
+                    <td>&nbsp;71.4710 mV</td>
+                </tr>
 
-                    <!-- E_K -->
-                    <tr>
-                        <td>\( E_{K} \)</td>
-                        <td>
-                            The electrochemical potential of the Potassium ion.
-                        </td>
-                        <td>-89.0587 mV</td>
-                    </tr>
+                <!-- E_K -->
+                <tr>
+                    <td>\( E_{K} \)</td>
+                    <td>
+                        The electrochemical potential of the Potassium ion.
+                    </td>
+                    <td>-89.0587 mV</td>
+                </tr>
 
-                    <!-- E_L -->
-                    <tr>
-                        <td>\( E_{L} \)</td>
-                        <td>
-                            The electrochemical potential of the 
-                            
-                            <div class="tooltip">leak current
-                                <span class="tooltiptext">
-                                    The leak current is the flow of Sodium & Potassium ions across the cell membrane 
-                                    that happens even when the neuron is not actively transmitting signals. It helps 
-                                    set the resting membrane potential of neurons, which is important for normal 
-                                    functioning.
-                                </span>
-                            </div>
-                        </td>
-                        <td>-55.0000 mV</td>
-                    </tr>
+                <!-- E_L -->
+                <tr>
+                    <td>\( E_{L} \)</td>
+                    <td>
+                        The electrochemical potential of the 
+                        
+                        <div class="tooltip">leak current
+                            <span class="tooltiptext">
+                                The leak current is the flow of Sodium & Potassium ions across the cell membrane 
+                                that happens even when the neuron is not actively transmitting signals. It helps 
+                                set the resting membrane potential of neurons, which is important for normal 
+                                functioning.
+                            </span>
+                        </div>
+                    </td>
+                    <td>-55.0000 mV</td>
+                </tr>
 
-                    <!-- V_r -->
-                    <tr>
-                        <td>\( V_r \)</td>
-                        <td>
-                            The electric potential across the neuron's membrane at rest. 
-                            Also known as the resting membrane potential (\(V_m\))
-                        </td>
-                        <td>-72.8515 mV</td>
-                    </tr>
+                <!-- V_r -->
+                <tr>
+                    <td>\( V_r \)</td>
+                    <td>
+                        The electric potential across the neuron's membrane at rest &nbsp; &nbsp; (
+                        <div class="tooltip">resting membrane potential
+                            <span class="tooltiptext">This was calculated using the conductances of the different ions involved
+                                and electrochemical potentials calculated above.</span>
+                        </div>
+                        ).
+                    </td>
+                    <td>-72.8515 mV</td>
+                </tr>
 
-                </table>
+                <!-- V_m -->
+                <tr>
+                    <td>\( V_m \)</td>
+                    <td>
+                        The  
+                        <div class="tooltip">electric potential
+                            <span class="tooltiptext">This was calculated using the concentrations of sodium and potassium
+                                    ions inside and outside the cell. The value is very close to \(V_r\), since the concentrations 
+                                    used correspond to a neuron in its resting state.</span>
+                        </div>
+                        across the neuron's membrane at time t=0. Also known as membrane potential.
+                    </td>
+                    <td>-72.6109 mV</td>
+                </tr>
 
-                Those values can be plugged into the Hodgkin-Huxley model equation, along with the conductances of each ion/channel 
-                (\(g_{Na}\), \(g_{K}\), \(g_{L}\))
+
+            </table>
+
+            <p>
+                Those values can be plugged into the Hodgkin-Huxley model equation as the initial state of the neuron, along with 
+                the conductances of each ion/channel (\(g_{Na}\), \(g_{K}\), \(g_{L}\))
 
                 \[ 
                 
@@ -244,39 +265,70 @@
                 <b>n</b> gating parameter.
                 <br/><br/>
 
-                The \(I_{stim}\) varialbe accounts for the current that we 'manually' inject into the neuron. Any current we 
+                The \(I_{stim}\) variable accounts for the current that we 'manually' inject into the neuron. Any current we 
                 inject does affect the membrane potential. Including \(I_{stim}\) in the equation allows our simulated neuron 
                 to respond to simulated external stimuli.
-
-                <h3>The Potassium Model:</h3>
-
-                The conductance of Potassium ions is given by
-                \[
-                    { g_K (t, v_m) } = { \overline{g_K} \times n^4(t, v_m)}
-                \]
-                
-                This equation is dependent on the gating parameter <b>n</b>, and we can model the change in <b>n</b> over time 
-                using:
-                
-                \[
-                    {dn \over dt} = { \alpha_n v_m (1-n)\ -\ \beta_n v_m n }
-                \]
-
-                where \(\alpha_n\) and \(\beta_n\) are coefficients calculated using the \(v_m\).
-
-                <h3>The Sodium Model:</h3>
-
-                Will be added in later (I promise)
-
                 
             </p>
 
+            <!-- Potassium Model -->
+            <details>
+                <summary style="font-size: 1.2em;">The Potassium Model</summary>
+
+                <p>
+                    The conductance of Potassium ions is given by
+                    \[
+                        { g_K (t, v_m) } = { \overline{g_K} \times n^4(t, v_m)}
+                    \]
+                    
+                    This equation is dependent on the gating parameter <b>n</b>, and we can model the change in <b>n</b> over time 
+                    using a differential equation.
+                    
+                    \[
+                        {dn \over dt} = { \alpha_n v_m (1-n)\ -\ \beta_n v_m n }
+                    \]
+
+                    where \(\alpha_n\) and \(\beta_n\) are coefficients calculated using the potential difference 
+                    \(v_m = V_m - V_r\). This \(v_m\) (lowercase as opposed to  \(V_m\) ) is the difference between the current state
+                    of a neuron and the initial resting state.
+                </p>
+                
+            </details>
+
+            <!-- Sodium Model -->
+            <details>
+                <summary style="font-size: 1.2em;">The Sodium Model</summary>
+
+                <p>
+                    Similar to the Potassium Model, the conductance of sodium (Na<sup>+</sup>) ions is given by
+
+                    \[
+                        { g_{Na} (t, v_m) } = { \overline{g_K} \times m^3 (t, v_m) \times h (t, v_m)}
+                    \]
+
+                    There are two gating parameters here &#8212; <b>m</b> and <b>h</b> &#8212; and we can model the rate of change of 
+                    those parameters using their own differential equations.
+
+                        \[
+                        {dm \over dt} = { \alpha_m (1 - m) - \beta_m \ m }
+                        \]
+
+                        \[
+                        {dh \over dt} = { \alpha_h (1 - h) - \beta_h \ h }
+                        \]
+
+                    Here, the \(\alpha\)s and \(\beta\)s are coefficients that care calculated using the membrane voltage 
+                    \(v_m = V_m - V_r\)
+                </p>
+            </details>
+
+            
         </div>
 
-    </details>
+    </article>
 
     <!-- Results Section -->
-    <details id="results" open>
+    <article id="results">
         <summary>Results</summary>
 
         <div>
@@ -286,10 +338,10 @@
 
         </div>
 
-    </details>
+    </article>
 
     <!-- Contributors Section -->
-    <details id="contributors" open>
+    <article id="contributors">
         <summary>Contributors</summary>
 
         <div>
@@ -300,14 +352,14 @@
                     <td>
                         <div class="card" style="background-color: var(--background-highlight);">
                             <h2>Andrew Li</h2>
-                            <p class="metadata">Teammate</p>
+                            <p class="metadata" style="font-weight: bold;">Teammate</p>
                         </div>
                     </td>
 
                     <td>
                         <div class="card" style="background-color: var(--background-highlight);">
                             <h2>Harry Zou</h2>
-                            <p class="metadata">Teammate</p>
+                            <p class="metadata" style="font-weight: bold;">Teammate</p>
                         </div>
                     </td>
 
@@ -317,7 +369,7 @@
                     <td>
                         <div class="card" style="background-color: var(--background-highlight);">
                             <h2>Josh Evans</h2>
-                            <p class="metadata">Teammate</p>
+                            <p class="metadata" style="font-weight: bold;">Teammate</p>
                         </div>
                     </td>
 
@@ -328,17 +380,16 @@
 
             <P class="metadata" style="font-weight: normal; font-style: italic;">
                 Published in collaboration with all contributors and the course instructor. <br/>
-                Code has been modified and obfuscated to prevent future students in the course from 
+                Code has been modified to try to prevent future students in the course from 
                 using it for their assignments.
             </p>
 
         </div>
 
-    </details>
+    </article>
     
-
-
-    <footer class="footer">
+    <!-- Footer Section -->
+    <footer>
         <div style="margin: 20px 0px;"></div> <!-- A spacer, since <br> doesn't work apparently -->
         <hr>
 
@@ -360,8 +411,6 @@
             </a>
         </div>
     </footer>
-
-    <script src="C:/Users/mihir/OneDrive/Programs/hodgkin-huxley/resources/scripts.js"></script>
 
 </body>
 

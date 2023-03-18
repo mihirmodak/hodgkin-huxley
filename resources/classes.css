@@ -75,7 +75,7 @@
     width:400px;
     background-color: var(--background-highlight);
     color: var(--text-light-theme);
-    text-align: center;
+    text-align: left;
     border-radius: 6px;
     /* border: 1px solid var(--background-invert-highlight); */
     padding: 5px 0;

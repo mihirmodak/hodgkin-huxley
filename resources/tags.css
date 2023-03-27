@@ -120,18 +120,16 @@ p {
 }
 
 summary {
-    font-size: 1.75em;
+    font-size: 1.5em;
     color: var(--text-sharp);
-    margin-top: 0.67em;
-    margin-bottom: 0.67em;
+    /* margin-top: 0.67em;
+    margin-bottom: 0.67em; */
+    margin-top: 1em;
+    margin-bottom: 1em;
     margin-left: 0;
     margin-right: 0;
     font-weight: bold;
     line-height: inherit;
-    /* cursor: pointer; */
-    /* user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;  */
 }
 
 table {

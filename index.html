@@ -317,55 +317,71 @@
                 </p>
 
                 <!-- Potassium Model -->
-                <article>
-                    <summary style="font-size: 1.2em;">The Potassium Model</summary>
-
-                    <p>
-                        The conductance of Potassium ions is given by
-                        \[
-                            { g_K (t, v_m) } = { \overline{g_K} \times n^4(t, v_m)}
-                        \]
-                        
-                        This equation is dependent on the gating parameter <b>n</b>, and we can model the change in <b>n</b> over time 
-                        using a differential equation.
-                        
-                        \[
-                            {dn \over dt} = { \alpha_n v_m (1-n)\ -\ \beta_n v_m n }
-                        \]
-
-                        where \(\alpha_n\) and \(\beta_n\) are coefficients calculated using the potential difference 
-                        \(v_m = V_m - V_r\). This \(v_m\) (lowercase as opposed to  \(V_m\) ) is the difference between the current state
-                        of a neuron and the initial resting state.
-                    </p>
+                <h3>The Potassium Model</h3>
+                <p>
+                    The conductance of Potassium ions is given by
+                    \[
+                        { g_K (t, v_m) } = { \overline{g_K} \times n^4(t, v_m)}
+                    \]
                     
-                </article>
+                    This equation is dependent on the gating parameter <b>n</b>, and we can model the change in <b>n</b> over time 
+                    using a differential equation.
+                    
+                    \[
+                        {dn \over dt} = { \alpha_n v_m (1-n)\ -\ \beta_n v_m n }
+                    \]
+
+                    where \(\alpha_n\) and \(\beta_n\) are coefficients calculated using the potential difference 
+                    \(v_m = V_m - V_r\). This \(v_m\) (lowercase as opposed to  \(V_m\) ) is the difference between the current state
+                    of a neuron and the initial resting state.
+                </p>
 
                 <!-- Sodium Model -->
-                <article>
-                    <summary style="font-size: 1.2em;">The Sodium Model</summary>
+                <h3>The Sodium Model</h3>
+                <p>
+                    Similar to the Potassium Model, the conductance of sodium (Na<sup>+</sup>) ions is given by
 
-                    <p>
-                        Similar to the Potassium Model, the conductance of sodium (Na<sup>+</sup>) ions is given by
+                    \[
+                        { g_{Na} (t, v_m) } = { \overline{g_K} \times m^3 (t, v_m) \times h (t, v_m)}
+                    \]
+
+                    There are two gating parameters here &#8212; <b>m</b> and <b>h</b> &#8212; and we can model the rate of change of 
+                    those parameters using their own differential equations.
 
                         \[
-                            { g_{Na} (t, v_m) } = { \overline{g_K} \times m^3 (t, v_m) \times h (t, v_m)}
+                        {dm \over dt} = { \alpha_m (1 - m) - \beta_m \ m }
                         \]
 
-                        There are two gating parameters here &#8212; <b>m</b> and <b>h</b> &#8212; and we can model the rate of change of 
-                        those parameters using their own differential equations.
+                        \[
+                        {dh \over dt} = { \alpha_h (1 - h) - \beta_h \ h }
+                        \]
 
-                            \[
-                            {dm \over dt} = { \alpha_m (1 - m) - \beta_m \ m }
-                            \]
+                    Here, the \(\alpha\)s and \(\beta\)s are coefficients that care calculated using the membrane voltage 
+                    \(v_m = V_m - V_r\)
+                </p>
 
-                            \[
-                            {dh \over dt} = { \alpha_h (1 - h) - \beta_h \ h }
-                            \]
+                <h3>Implementation</h3>
 
-                        Here, the \(\alpha\)s and \(\beta\)s are coefficients that care calculated using the membrane voltage 
-                        \(v_m = V_m - V_r\)
-                    </p>
-                </article>
+                <p>
+                    We implemented the Hodgkin-Huxley model in MATLAB using the <code>ode45</code> command. Our implementation 
+                    involved creating multiple components to simulate and visualize the changing membrane voltages based on the 
+                    model's principles. Firstly, we collectively worked on a function file called <code>hh_model.m</code>, which 
+                    contained the differential equations governing the model. This single function takes care of running the ode45 
+                    function and updating all the model parameters.
+                    <br/><br/>
+                    Additionally, we developed another function file called <code>RepetitiveStimulator.m</code>, which determined 
+                    the stimulation at any given time. This function takes into account properties such as duration, magnitude, and 
+                    timing to calculate the stimulation magnitude.
+                    <br/><br/>
+                    In the main code file, named <code>main.m</code>, we brought together our individual contributions. We called the 
+                    <code>ode45</code> function to simulate the changing membrane voltage, setting up parameters such as simulation 
+                    duration, time step, and initial membrane voltage. We also formulated a loop that iterated over each time step, 
+                    calling <code>ode45</code> and incorporating the stimulation determined by the <code>stimulation.m</code> 
+                    function.
+                    <br/><br/>
+                    Finally, we used the <code>plot</code> function to visualize the membrane voltage output. By plotting the voltage 
+                    against time, we were able to observe the simulation results and analyze the behavior of the Hodgkin-Huxley model.
+                </p>
 
                 
             </div>
@@ -379,7 +395,69 @@
             <div>
 
                 <!-- Text for Results Section -->
-                <p>Will be added soon.</p>
+
+                <p>With this implementation of the Hodgkin-Huxley Model, we tried to answer 4 different questions about the simulated neuron.</p>
+                <ol>
+                    <li>What is the resting membrane potential of the simulated neuron?</li>
+                    <li>What is the actional potential threshold of the neuron? In other words, what membrane voltage needs to be reached to generate an action potential?</li>
+                    <li>What heppens when we stimulate the neuron using a hyperpolarizing impulse instead of a depolarizing impulse?</li>
+                    <li>How long is the absolute and relative refractory period of the simulated neruon? Or, what is the minimum time between two action potentials?</li>
+                    <li>How much of an effect does the initial membrance potential have on the activity of the neuron? Does this resemble any disease states?</li>
+                </ol>
+
+                <h3>Finding the Resting Membrane Potential</h3>
+                <p>
+                    First, we ran the model without providing any stimuli. This gave us a steady plot with the membrane voltage while 
+                    the neuron is at rest. By definition, that magnitude is the resting membrane potential (RMP) of the simulated 
+                    neuron.
+                </p>
+                <img src="resources/results/0 Resting State.jpg">
+
+                <h3>Generating a Single Action Potential</h3>
+                <p>Through trial and error, starting from the resting membrane potential, we found that the neuron's threshold was 
+                    around -67 mV. This means that a minimum stimulus current of approximately 79 nA was needed to trigger an action 
+                    potential.</p>
+                <img src="resources/results/1 Determining Threshold 79.png" alt="Membrane voltage with a stimulus of 79nA, showing a clearly defined action potential">
+
+                <h3>Generating a Hyperpolarized Action Potential</h3>
+                <p>
+                    The threshold for a hyperpolarizing stimulus is the voltage value at which the 'rebound depolarization' exceeds 
+                    the depolarization threshold found above in part 1. This value is more negative than the resting membrane 
+                    potential, since a hyperpolarizing stimulus lowers the voltage across the membrane. Through trial and error, we 
+                    found that the hyperpolarization threshold is around -81.1 mV, corresponding to a -71nA current. 
+                </p>
+                <img src="resources/results/2 Hpyerpolarized 71.jpg">
+
+                <h3>Measuring the Refractory Period</h3>
+                <p>
+                    We then wanted to find out how quickly our neuron can recover from firing an action potential. Or, how quickly 
+                    can our neuron fire a second AP after already firing once? We provided multiple stimuli to the neuron with 
+                    varying time separation between the stimuli (the magnitude of the stimuli was constant for a single simulation 
+                    run). Using the data collected from all the runs, we created the plot below. 
+                    <br/><br/>
+                    The absolute refractory period of the neuron was around 4.53 ms, where it would take a large stimulus (larger 
+                    than 450 nA) to fire another AP. The relative refractory period lasted approximately 30 ms, until the current 
+                    required became more stable between 50 nA and 100 nA. 
+                    
+                </p>
+                <img src="resources/results/3 Refractory Period Plot.jpg">
+
+                <h3>Impact of the Membrane Potential</h3>
+                <p>
+                    We finally decided to change the RMP value from the biologically standard -72 mV. First, we set the RMP to 
+                    -90 mV, more negative than the biologically observed value of -72 mV. In this case, applying a single stimulus at 
+                    1.0 ms causes a cascade of sequential action potentials, seemingly without end.
+                </p>
+                <img src="resources/results/4 Disease State -90.jpg">
+                <p>
+                    Meanwhile, setting the Vr value to -50 mV (more positive than the biologically observed value) results in a 
+                    single action potential from a single stimulus. This behavior is the same as the neuronal behavior seen before, 
+                    in non-disease states. However, it should be noted that rate of change in membrane voltage and in gating 
+                    parameter values is dependent on the magnitude of the stimulus. Larger stimuli cause faster changes in these 
+                    values as seen here.
+                </p>
+                <img src="resources/results/4 Disease State -50.jpg">
+
 
             </div>
 

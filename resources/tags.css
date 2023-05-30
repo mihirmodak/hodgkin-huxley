@@ -75,7 +75,7 @@ a.button.round{
 }
 
 details {
-    cursor: pointer;
+    /* cursor: default; */
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -130,6 +130,7 @@ summary {
     margin-right: 0;
     font-weight: bold;
     line-height: inherit;
+    cursor: pointer;
 }
 
 table {

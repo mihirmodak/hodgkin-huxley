@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html theme="light">
+
+<head>
+    <!-- SEO Information -->
+    <title>A Computational Model of a Human Neuron</title>
+    <meta name="description" content="A mathematical model implemented in MATLAB that can simulate the activity of a 
+    neuron, such as action excitation, inhibition, and action potentials. ">
+
+    <!-- Settings for the whole document -->
+    <base target="_blank">
+
+    <!-- Add Page Icons -->
+    <link rel="icon" type="image/x-icon" href="web-resources/logo.png">
+    <link rel="apple-touch-icon" href="web-resources/logo.png">
+
+    <!-- MathJax JavaScript -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- CSS -->
+    <link rel="preload" href="web-resources/styles.css" as="style">
+    <link rel="stylesheet" href="web-resources/styles.css">
+    <link rel="preload" href="web-resources/tags.css" as="style">
+    <link rel="stylesheet" href="web-resources/tags.css">
+    <link rel="preload" href="web-resources/classes.css" as="style">
+    <link rel="stylesheet" href="web-resources/classes.css">
+
+    <style data-href="https://fonts.googleapis.com/css2?family=Inter:wght@40;50;60;70;80;900&amp;display=swap">
+        
+        @font-face{
+            font-family:'Inter';
+            font-style:normal;
+            font-weight:400;
+            font-display:swap;
+            src:url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfMZs.woff) format('woff')
+        }
+        @font-face{
+            font-family:'Inter';
+            font-style:normal;
+            font-weight:500;
+            font-display:swap;
+            src:url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuI6fMZs.woff) format('woff')
+        }
+        @font-face{
+            font-family:'Inter';
+            font-style:normal;
+            font-weight:600;
+            font-display:swap;
+            src:url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuGKYMZs.woff) format('woff')
+        }
+        @font-face{
+            font-family:'Inter';
+            font-style:normal;
+            font-weight:700;
+            font-display:swap;
+            src:url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYMZs.woff) format('woff')
+        }
+        @font-face{
+            font-family:'Inter';
+            font-style:normal;
+            font-weight:800;
+            font-display:swap;
+            src:url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuDyYMZs.woff) format('woff')
+        }
+        @font-face{
+            font-family:'Inter';
+            font-style:normal;
+            font-weight:900;
+            font-display:swap;
+            src:url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuBWYMZs.woff) format('woff')
+        }
+
+    </style>
+        
+</head>
+
+<body>
+
+    <!-- Page Title -->
+    <p class="title">A Computational Model of a Human Neuron</p>
+
+    <!-- Author Info -->
+    <p class="metadata">Mihir Modak • September 23, 2021 • MATLAB</p>
+
+    <!-- Cover Image -->
+    <div contenteditable="false" style="display:flex; justify-content: center;">
+        <img alt="" src="web-resources/cover.gif" decoding="async" loading="lazy">
+    </div>
+
+    <!-- High-Level Overview -->
+    <article id="overview">
+        <h2>Overview & Motivation</h2>
+        <p>
+            The Hodgkin-Huxley model is a mathematical model of the electrical activity of neurons, based on the 
+            movement of ions across the cell membrane through voltage-gated ion channels. Simulating this model using MATLAB 
+            involves solving a system of differential equations that describe the behavior of the ion channels 
+            in the neuron.
+            <br/><br/>
+            Tthe primary motivation for simulating neurons using the Hodgkin-Huxley model is to gain a better understanding of how 
+            individual ion channels can affect the overall activity of the neuron. It is able to consider a wide variety of ion 
+            conductances and kinetics to accurately simulate a neuron's behavior. It's also able to account for multiple 
+            simultaneous changes in the parameters and accurately reflect those changes in the neuron's behavior on the fly.
+        </p>
+        
+        <h2>Challenges</h2>
+        <p>
+            THe Hodgkin-Huxley model involves multiple ion channels with varying conductances and kinetics. 
+            This complexity can make it challenging to figure out the appropriate parameters for a specific neuron or 
+            experimental condition. It's also difficult to choose the right initial conditions to start the model. If the 
+            parameters are set incorrectly, the neuron may show some unexpected behavior. It may never gain enough charge to
+            fire (a dead neuron), or it may start firing quickly and erratically (kind of like a seizure).
+            <br/><br/>
+            This model can also be computationally expensive, since it's calculating the solution to a set of differential 
+            equations for every simulated time point. Optimizing the model parameters can be challenging due to the high number 
+            of parameters involved and the wide range of values that each parameter can take. The language used in this project 
+            (MATLAB) is already well-optimized, but the code still needed some further optimization to simulate 
+            the neuron for a long time. 
+        </p>
+        
+        <h2>Impact</h2>
+        <p>
+            Despite these challenges, simulating neurons using the Hodgkin-Huxley model has had a significant impact on our 
+            understanding of the nervous system. We were able to see the direct impact of sodium and potassium ions on the 
+            activity and behavior of the neuron. We were also able to simulate certain 'disease' states, such the rapid firing 
+            of seizures and even cell death due to toxicity.
+            <br/><br/>
+            The Hodgkin-Huxley model has helped researchers gain insights into a wide range of behaviors, from the generation 
+            of action potentials to the processing of sensory information in the brain. The model has also been used 
+            to develop controllers for epilepsy and epilespy-like conditions observed in neural prosthetics and brain-machine 
+            interfaces.
+        </p>
+    </article>
+
+    <a href="details.html" style="color: inherit; text-decoration: none;" target="_self">
+        <h2 class="full-report-link">Detailed Explanation</h2>
+    </a>
+    
+
+    <!-- Contributors Section -->
+    <article id="contributors">
+        <h2>Contributors</h2>
+
+        <div>
+
+            <table class="contributors" style="border: none; border-left: none;">
+
+                <tr>
+                    <td>
+                        <div class="card" style="background-color: var(--background-highlight);">
+                            <h2>Andrew Li</h2>
+                            <p class="metadata" style="font-weight: bold;">Teammate</p>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="card" style="background-color: var(--background-highlight);">
+                            <h2>Harry Zou</h2>
+                            <p class="metadata" style="font-weight: bold;">Teammate</p>
+                        </div>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="card" style="background-color: var(--background-highlight);">
+                            <h2>Josh Evans</h2>
+                            <p class="metadata" style="font-weight: bold;">Teammate</p>
+                        </div>
+                    </td>
+
+                    
+                </tr>
+
+            </table>
+
+            <P class="metadata" style="font-weight: normal; font-style: italic;">
+                Published in collaboration and with consent of the course instructor and all contributors.
+            </p>
+
+        </div>
+
+    </article>
+    
+    <!-- Footer Section -->
+    <footer>
+        <div style="margin: 20px 0px;"></div> <!-- A spacer, since <br> doesn't work apparently -->
+        <hr>
+
+        <div class="footer links">
+            <a href="https://mihir-modak.com/" class="button round" target="_self">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Home-icon.svg/800px-Home-icon.svg.png" class="logo">
+            </a>
+            <a href="https://github.com/mihirmodak" class="button round">
+                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" class="logo">
+            </a>
+
+            <a href="https://www.linkedin.com/in/mihir-modak/" class="button round" >
+                <img src="https://cdn-icons-png.flaticon.com/512/61/61109.png" class="logo">
+            </a>
+
+            <a href="https://1drv.ms/b/s!ApOEOvPnvhLAjtZJ2pz83mHzuuD3TA?e=BLlYrE" class="button round" >
+                    <img src="https://icons.veryicon.com/png/o/miscellaneous/general-icon-library/resume-7.png" class="logo">
+            </a>
+
+            <a href="mailto:mihir.modak@outlook.com" class="button round" >
+                <img src="https://cdn-icons-png.flaticon.com/512/2989/2989993.png" class="logo">
+            </a>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html theme="light">
+
+<head>
+    <!-- SEO Information -->
+    <title>A Computational Model of a Human Neuron</title>
+    <meta name="description" content="A mathematical model implemented in MATLAB that can simulate the activity of a 
+    neuron, such as action excitation, inhibition, and action potentials. ">
+
+    <!-- Settings for the whole document -->
+    <base target="_blank">
+
+    <!-- Add Page Icons -->
+    <link rel="icon" type="image/x-icon" href="web-resources/logo.png">
+    <link rel="apple-touch-icon" href="web-resources/logo.png">
+
+    <!-- MathJax JavaScript -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- CSS -->
+    <link rel="preload" href="web-resources/styles.css" as="style">
+    <link rel="stylesheet" href="web-resources/styles.css">
+    <link rel="preload" href="web-resources/tags.css" as="style">
+    <link rel="stylesheet" href="web-resources/tags.css">
+    <link rel="preload" href="web-resources/classes.css" as="style">
+    <link rel="stylesheet" href="web-resources/classes.css">
+
+    <style data-href="https://fonts.googleapis.com/css2?family=Inter:wght@40;50;60;70;80;900&amp;display=swap">
+        
+        @font-face{
+            font-family:'Inter';
+            font-style:normal;
+            font-weight:400;
+            font-display:swap;
+            src:url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfMZs.woff) format('woff')
+        }
+        @font-face{
+            font-family:'Inter';
+            font-style:normal;
+            font-weight:500;
+            font-display:swap;
+            src:url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuI6fMZs.woff) format('woff')
+        }
+        @font-face{
+            font-family:'Inter';
+            font-style:normal;
+            font-weight:600;
+            font-display:swap;
+            src:url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuGKYMZs.woff) format('woff')
+        }
+        @font-face{
+            font-family:'Inter';
+            font-style:normal;
+            font-weight:700;
+            font-display:swap;
+            src:url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYMZs.woff) format('woff')
+        }
+        @font-face{
+            font-family:'Inter';
+            font-style:normal;
+            font-weight:800;
+            font-display:swap;
+            src:url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuDyYMZs.woff) format('woff')
+        }
+        @font-face{
+            font-family:'Inter';
+            font-style:normal;
+            font-weight:900;
+            font-display:swap;
+            src:url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuBWYMZs.woff) format('woff')
+        }
+
+    </style>
+        
+</head>
+
+<body>
+
+    <!-- Page Title -->
+    <p class="title">A Computational Model of a Human Neuron</p>
+
+    <!-- Author Info -->
+    <p class="metadata">Mihir Modak • September 23, 2021 • MATLAB</p>
+
+    <!-- Cover Image -->
+    <div contenteditable="false" style="display:flex; justify-content: center;">
+        <img alt="" src="web-resources/cover.gif" decoding="async" loading="lazy">
+    </div>
+
+
+    <!-- Abstract Section -->
+    <article id="abstract">
+        <h2>Abstract</h2>
+
+        <div id="abstract-content">
+
+            <!-- Text for Abstract Section -->
+            <p>
+                This project was originally a lab assignment in a physiology course at the University of Maryland. It involved 
+                implementing the <em>Hodgkin-Huxley Model</em> in MATLAB, figuring out the relevant thresholds to manipulate 
+                the neuron's state, and changing the parameters to cause a 'disease' state (a state wildly different from the 
+                normal activity of the neuron).
+            </p>
+
+        </div>
+
+    </article>
+
+    <!-- Background & Motivation Section -->
+    <article id="background">
+        <h2>Background</h2>
+
+        <div id="background-content">
+
+            <!-- Text for Background & Motivation Section -->
+            <p>
+                The <em>Hodgkin-Huxley Model</em> is a mathematical model of a human neuron that can mimic the electrical 
+                voltage across a neuron's membrane by tracking multiple parameters about the neuron's state and environment.
+                <br/><br/>
+
+                Human neurons (or really, any neurons) have one very important property that lets them transmit information
+                through electric impulses along the length of their cell body. Neurons can generate 
+                <strong>action potentials (APs)</strong>, which are giant upward (positive) spikes in the voltage across
+                the cell membrane. 
+                <br/><br/>
+
+                Neurons can generate these because they have ion channels in their membrane. They can passively increase
+                the voltage across their cell membrane (membrane voltage or \(V_m\)) until a certain threshold. Once the 
+                threshold is reached, a whole bunch of gates open up for ions to flow freely. And that causes the giant 
+                spike that you see in the image below.
+                <br/><br/>
+
+                A detailed description of how the model works and the parameters it tracks can be found in the 'Conceptual 
+                Summary' section of 
+                <a href="https://www.st-andrews.ac.uk/~wjh/hh_model_intro/">this article</a>.  
+                MIT OpenCourseWare also has some videos
+                <a href="https://www.youtube.com/watch?v=88tKZLGOr3M">here</a> and 
+                <a href="https://www.youtube.com/watch?v=K1pxJVdqlxw">here</a> that explain the concepts really well.
+                <br/><br/>
+
+                The exact opening and closing of the Sodium (Na<sup>+</sup>) and Potassium (K<sup>+</sup>) channels 
+                coresponds to different points in the action potential spike.
+            </p>
+            <img src="web-resources/action_potential.png"  
+            alt="Action Potential with Na & K ion channels opening and closing events mapped onto the voltage curve over 
+                time." 
+            >
+            <P class="metadata" style="font-weight: normal; font-style: italic; text-align: center;">
+                Figure is taken from course material provided by Dr. John Fisher.
+            </p>
+
+        </div>
+
+    </article>
+
+    <!-- Process Section -->
+    <article id="process">
+        <h2>Process</h2>
+
+        <div id="process-content">
+
+            <!-- Text for Process Section -->
+            <p>
+                To simulate a human neuron accurately, we need to calculate some initial properties of the neuron to start our 
+                simulation.
+            </p>
+
+            <table>
+                <tr style="text-align: center;">
+                    <th>Variable</th>
+                    <th>Description</th>
+                    <th style="width: 140px;">Value</th>
+                </tr>
+
+                <!-- E_Na -->
+                <tr>
+                    <td>\( E_{Na} \)</td>
+                    <td>
+                        The
+                        <div class="tooltip"> electrochemical potential
+                            <span class="tooltiptext">This is a measure of the driving force that causes the movement
+                                of the ion (in this case Na<sup>+</sup>) into and out of the neuron. It's calculated using
+                            the typical (experimentally-found) concentration of ions inside and outside the cell.</span>
+                        </div>
+                        of the Sodium ion.
+                    </td>
+                    <td>&nbsp;71.4710 mV</td>
+                </tr>
+
+                <!-- E_K -->
+                <tr>
+                    <td>\( E_{K} \)</td>
+                    <td>
+                        The electrochemical potential of the Potassium ion.
+                    </td>
+                    <td>-89.0587 mV</td>
+                </tr>
+
+                <!-- E_L -->
+                <tr>
+                    <td>\( E_{L} \)</td>
+                    <td>
+                        The electrochemical potential of the 
+                        
+                        <div class="tooltip">leak current
+                            <span class="tooltiptext">
+                                The leak current is the flow of Sodium & Potassium ions across the cell membrane 
+                                that happens even when the neuron is not actively transmitting signals. It helps 
+                                set the resting membrane potential of neurons, which is important for normal 
+                                functioning.
+                            </span>
+                        </div>
+                    </td>
+                    <td>-55.0000 mV</td>
+                </tr>
+
+                <!-- V_r -->
+                <tr>
+                    <td>\( V_r \)</td>
+                    <td>
+                        The electric potential across the neuron's membrane at rest &nbsp; &nbsp; (
+                        <div class="tooltip">resting membrane potential
+                            <span class="tooltiptext">This was calculated using the conductances of the different ions involved
+                                and electrochemical potentials calculated above.</span>
+                        </div>
+                        ).
+                    </td>
+                    <td>-72.8515 mV</td>
+                </tr>
+
+                <!-- V_m -->
+                <tr>
+                    <td>\( V_m \)</td>
+                    <td>
+                        The  
+                        <div class="tooltip">electric potential
+                            <span class="tooltiptext">This was calculated using the concentrations of sodium and potassium
+                                    ions inside and outside the cell. The value is very close to \(V_r\), since the concentrations 
+                                    used correspond to a neuron in its resting state.</span>
+                        </div>
+                        across the neuron's membrane at time t=0. Also known as membrane potential.
+                    </td>
+                    <td>-72.6109 mV</td>
+                </tr>
+
+
+            </table>
+
+            <p>
+                Those values can be plugged into the Hodgkin-Huxley model equation as the initial state of the neuron, along with 
+                the conductances of each ion/channel (\(g_{Na}\), \(g_{K}\), \(g_{L}\))
+
+                \[ 
+                
+                    {dV_m \over dt} = { - g_K (V_m - E_K) - g_{Na} (V_m - E_{Na}) - g_L (V_m - E_L) + I_{stim} \over {C_m} }
+                
+                \]
+
+                This model considers the movement of two ions &#8212; Sodium (Na<sup>+</sup>) and Potassium (K<sup>+</sup>). Each 
+                ion has its own channels, and each of those is controlled by <strong>gating parameters</strong>. See 
+                the Conceptual Summary in <a href="https://www.st-andrews.ac.uk/~wjh/hh_model_intro/">this</a> article for a more 
+                complete and detailed explanation. 
+                The Na<sup>+</sup> conductance through the ion channels is controlled by two gating parameters, 
+                (<b>m</b> and <b>h</b>) while the K<sup>+</sup> conductance is governed by the 
+                <b>n</b> gating parameter.
+                <br/><br/>
+
+                The \(I_{stim}\) variable accounts for the current that we 'manually' inject into the neuron. Any current we 
+                inject does affect the membrane potential. Including \(I_{stim}\) in the equation allows our simulated neuron 
+                to respond to simulated external stimuli.
+                
+            </p>
+
+            <!-- Potassium Model -->
+            <h3>The Potassium Model</h3>
+            <p>
+                The conductance of Potassium ions is given by
+                \[
+                    { g_K (t, v_m) } = { \overline{g_K} \times n^4(t, v_m)}
+                \]
+                
+                This equation is dependent on the gating parameter <b>n</b>, and we can model the change in <b>n</b> over time 
+                using a differential equation.
+                
+                \[
+                    {dn \over dt} = { \alpha_n v_m (1-n)\ -\ \beta_n v_m n }
+                \]
+
+                where \(\alpha_n\) and \(\beta_n\) are coefficients calculated using the potential difference 
+                \(v_m = V_m - V_r\). This \(v_m\) (lowercase as opposed to  \(V_m\) ) is the difference between the current state
+                of a neuron and the initial resting state.
+            </p>
+
+            <!-- Sodium Model -->
+            <h3>The Sodium Model</h3>
+            <p>
+                Similar to the Potassium Model, the conductance of sodium (Na<sup>+</sup>) ions is given by
+
+                \[
+                    { g_{Na} (t, v_m) } = { \overline{g_K} \times m^3 (t, v_m) \times h (t, v_m)}
+                \]
+
+                There are two gating parameters here &#8212; <b>m</b> and <b>h</b> &#8212; and we can model the rate of change of 
+                those parameters using their own differential equations.
+
+                    \[
+                    {dm \over dt} = { \alpha_m (1 - m) - \beta_m \ m }
+                    \]
+
+                    \[
+                    {dh \over dt} = { \alpha_h (1 - h) - \beta_h \ h }
+                    \]
+
+                Here, the \(\alpha\)s and \(\beta\)s are coefficients that care calculated using the membrane voltage 
+                \(v_m = V_m - V_r\)
+            </p>
+
+            <h3>Implementation</h3>
+
+            <p>
+                We implemented the Hodgkin-Huxley model in MATLAB using the <code>ode45</code> command. Our implementation 
+                involved creating multiple components to simulate and visualize the changing membrane voltages based on the 
+                model's principles. Firstly, we collectively worked on a function file called <code>hh_model.m</code>, which 
+                contained the differential equations governing the model. This single function takes care of running the ode45 
+                function and updating all the model parameters.
+                <br/><br/>
+                Additionally, we developed another function file called <code>RepetitiveStimulator.m</code>, which determined 
+                the stimulation at any given time. This function takes into account properties such as duration, magnitude, and 
+                timing to calculate the stimulation magnitude.
+                <br/><br/>
+                In the main code file, named <code>main.m</code>, we brought together our individual contributions. We called the 
+                <code>ode45</code> function to simulate the changing membrane voltage, setting up parameters such as simulation 
+                duration, time step, and initial membrane voltage. We also formulated a loop that iterated over each time step, 
+                calling <code>ode45</code> and incorporating the stimulation determined by the <code>stimulation.m</code> 
+                function.
+                <br/><br/>
+                Finally, we used the <code>plot</code> function to visualize the membrane voltage output. By plotting the voltage 
+                against time, we were able to observe the simulation results and analyze the behavior of the Hodgkin-Huxley model.
+            </p>
+
+            
+        </div>
+
+    </article>
+
+    <!-- Results Section -->
+    <article id="results">
+        <h2>Results</h2>
+
+        <div>
+
+            <!-- Text for Results Section -->
+
+            <p>With this implementation of the Hodgkin-Huxley Model, we tried to answer 4 different questions about the simulated neuron.</p>
+            <ol>
+                <li>What is the resting membrane potential of the simulated neuron?</li>
+                <li>What is the actional potential threshold of the neuron? In other words, what membrane voltage needs to be reached to generate an action potential?</li>
+                <li>What heppens when we stimulate the neuron using a hyperpolarizing impulse instead of a depolarizing impulse?</li>
+                <li>How long is the absolute and relative refractory period of the simulated neruon? Or, what is the minimum time between two action potentials?</li>
+                <li>How much of an effect does the initial membrance potential have on the activity of the neuron? Does this resemble any disease states?</li>
+            </ol>
+
+            <h3>Finding the Resting Membrane Potential</h3>
+            <p>
+                First, we ran the model without providing any stimuli. This gave us a steady plot with the membrane voltage while 
+                the neuron is at rest. By definition, that magnitude is the resting membrane potential (RMP) of the simulated 
+                neuron.
+            </p>
+            <img src="web-resources/results/0 Resting State.jpg">
+
+            <h3>Generating a Single Action Potential</h3>
+            <p>Through trial and error, starting from the resting membrane potential, we found that the neuron's threshold was 
+                around -67 mV. This means that a minimum stimulus current of approximately 79 nA was needed to trigger an action 
+                potential.</p>
+            <img src="web-resources/results/1 Determining Threshold 79.png" alt="Membrane voltage with a stimulus of 79nA, showing a clearly defined action potential">
+
+            <h3>Generating a Hyperpolarized Action Potential</h3>
+            <p>
+                The threshold for a hyperpolarizing stimulus is the voltage value at which the 'rebound depolarization' exceeds 
+                the depolarization threshold found above in part 1. This value is more negative than the resting membrane 
+                potential, since a hyperpolarizing stimulus lowers the voltage across the membrane. Through trial and error, we 
+                found that the hyperpolarization threshold is around -81.1 mV, corresponding to a -71nA current. 
+            </p>
+            <img src="web-resources/results/2 Hpyerpolarized 71.jpg">
+
+            <h3>Measuring the Refractory Period</h3>
+            <p>
+                We then wanted to find out how quickly our neuron can recover from firing an action potential. Or, how quickly 
+                can our neuron fire a second AP after already firing once? We provided multiple stimuli to the neuron with 
+                varying time separation between the stimuli (the magnitude of the stimuli was constant for a single simulation 
+                run). Using the data collected from all the runs, we created the plot below. 
+                <br/><br/>
+                The absolute refractory period of the neuron was around 4.53 ms, where it would take a large stimulus (larger 
+                than 450 nA) to fire another AP. The relative refractory period lasted approximately 30 ms, until the current 
+                required became more stable between 50 nA and 100 nA. 
+                
+            </p>
+            <img src="web-resources/results/3 Refractory Period Plot.jpg">
+
+            <h3>Impact of the Membrane Potential</h3>
+            <p>
+                We finally decided to change the RMP value from the biologically standard -72 mV. First, we set the RMP to 
+                -90 mV, more negative than the biologically observed value of -72 mV. In this case, applying a single stimulus at 
+                1.0 ms causes a cascade of sequential action potentials, seemingly without end.
+            </p>
+            <img src="web-resources/results/4 Disease State -90.jpg">
+            <p>
+                Meanwhile, setting the Vr value to -50 mV (more positive than the biologically observed value) results in a 
+                single action potential from a single stimulus. This behavior is the same as the neuronal behavior seen before, 
+                in non-disease states. However, it should be noted that rate of change in membrane voltage and in gating 
+                parameter values is dependent on the magnitude of the stimulus. Larger stimuli cause faster changes in these 
+                values as seen here.
+            </p>
+            <img src="web-resources/results/4 Disease State -50.jpg">
+
+
+        </div>
+
+    </article>
+
+    <!-- Conclusions Section -->
+    <article id="conclusions">
+        <h2>Conclusions</h2>
+        <p>
+            The Hodgkin-Huxley model seems to stimulate the behavior of neurons in response to depolarizing stimuli relatively 
+            accurately. The positive stimulus makes the membrane potential less negative, which in turn causes an increase in the 
+            activation parameter m and the parameter n. This also causes a corresponding decrease in the deactivation parameter 
+            h. All these changes combined lead to the generation of an action potential.
+            <br/><br/>
+            However, the hyperpolarization modeling could be improved. Hyperpolarization causes h (the inactivation parameter) to 
+            increase while the conductance of Na and K remains relatively small (decreasing during the stimulus). After the 
+            stimulus, the m parameter is the first to respond, increasing very quickly. When resting potential is reached, h has 
+            not had enough time to decrease to its normal value during rest. The result is that increased sodium current to the 
+            inside of the neuron causes depolarization and therefore an action potential.
+            <br/><br/>
+            The absolute refractory period found using this H-H model seem to be slightly inaccurate. For the given conditions 
+            in this model, the absolute refractory period found at 4.53 milliseconds is close but outside the range of 
+            experimental values (0.4 - 2 ms) However, the fact that this absolute refractory period can be seen in the model 
+            shows that the H-H model is a reasonably accurate simulation of electrical conduction in neurons.
+            <br/><br/>
+            The relative refractory period is due to the hyperpolarization of a neuron after an action potential. We can see in 
+            the model that it takes a larger than threshold stimulus to generate another action potential, and that the peak of 
+            this second action potential is lower in amplitude than the first. This aligns with the observed experimental 
+            behavior of neurons within the refractory period.
+        </p>
+    </article>
+
+    <!-- Contributors Section -->
+    <article id="contributors">
+        <h2>Contributors</h2>
+
+        <div>
+
+            <table class="contributors" style="border: none; border-left: none;">
+
+                <tr>
+                    <td>
+                        <div class="card" style="background-color: var(--background-highlight);">
+                            <h2>Andrew Li</h2>
+                            <p class="metadata" style="font-weight: bold;">Teammate</p>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="card" style="background-color: var(--background-highlight);">
+                            <h2>Harry Zou</h2>
+                            <p class="metadata" style="font-weight: bold;">Teammate</p>
+                        </div>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="card" style="background-color: var(--background-highlight);">
+                            <h2>Josh Evans</h2>
+                            <p class="metadata" style="font-weight: bold;">Teammate</p>
+                        </div>
+                    </td>
+
+                    
+                </tr>
+
+            </table>
+
+            <P class="metadata" style="font-weight: normal; font-style: italic;">
+                Published in collaboration and with consent of the course instructor and all contributors.
+            </p>
+
+        </div>
+
+    </article>
+    
+    <!-- Footer Section -->
+    <footer>
+        <div style="margin: 20px 0px;"></div> <!-- A spacer, since <br> doesn't work apparently -->
+        <hr>
+
+        <div class="footer links">
+            <a href="https://mihir-modak.com/" class="button round" target="_self">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Home-icon.svg/800px-Home-icon.svg.png" class="logo">
+            </a>
+            <a href="https://github.com/mihirmodak" class="button round">
+                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" class="logo">
+            </a>
+
+            <a href="https://www.linkedin.com/in/mihir-modak/" class="button round" >
+                <img src="https://cdn-icons-png.flaticon.com/512/61/61109.png" class="logo">
+            </a>
+
+            <a href="https://1drv.ms/b/s!ApOEOvPnvhLAjtZJ2pz83mHzuuD3TA?e=BLlYrE" class="button round" >
+                    <img src="https://icons.veryicon.com/png/o/miscellaneous/general-icon-library/resume-7.png" class="logo">
+            </a>
+
+            <a href="mailto:mihir.modak@outlook.com" class="button round" >
+                <img src="https://cdn-icons-png.flaticon.com/512/2989/2989993.png" class="logo">
+            </a>
+        </div>
+    </footer>
+</body>
+
+</html>
